@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+.toolbar h1 {
+  padding-left: 5px;
+}
+
+.notes-title {
+  padding: 10px;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+.notes-block {
+  padding: 10px;
+  text-align: center;
+}
+
+.note {
+  width: 40%;
+  border: none;
+  margin: auto;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  background-color: bisque;
+}
+
+
+.card-content {
+  width: 85%;
+}
+
+mat-card-title {
+  font-weight: bold;
+}
+.detail-label {
+  font-weight: bold;
+}
+
+.tag-name {
+  background-color: rgb(252, 252, 252);
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  float: center;
+  margin-left: 2%;
+}
+.all-habits {
+  text-align: center;
+}
+
+.all-habits h1 {
+  margin-top: 1em;
+}
+
+.all-habits mat-card {
+  width: 80%;
+  margin: 1em auto;
+  text-align: left;
+}
+
+.habit-icon {
+  vertical-align: middle;
+  padding-bottom: 3px;
+}
+
+.detail-options {
+  position: absolute;
+  bottom: 10px;
+  right: 5px;
+}
+
+.detail-options mat-icon {
+  padding-right: 5px;
+}
+
+.add-form-container {
+  padding: 4em;
+  text-align: center;
+  max-width: 400px;
+  margin: auto;
+}
+
+button:hover,
+.detail-options {
+  cursor: pointer;
+}
+
+.add-form-container mat-card-title {
+  margin: 1em !important;
+}
+
+.add-form-container button {
+  margin-top: 10px !important;
+}
+
+mat-card-content {
+  margin-bottom: 0;
+}
+
+form {
+  padding-top: 1em;
+}
+
+mat-form-field {
+  width: 90%;
+}
+
+.mat-icon-button {
+  vertical-align: middle;
+  padding-bottom: 3px;
+}
+
+section {
+  display: table;
+}
+
+.example-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  min-width: 120px;
+}
+
+.example-button-row {
+  display: table-cell;
+  max-width: 600px;
+}
+
+.example-button-row .mat-mdc-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}

@@ -1,0 +1,227 @@
+<div class="toolbar-container">
+  <mat-toolbar class="toolbar" color="primary">
+    <mat-icon>notes</mat-icon>
+    <h1>Мои заметки</h1>
+  </mat-toolbar>
+</div>
+
+<mat-tab-group mat-align-tabs="center">
+  <!-- ТАБ ЗАМЕТКИ -->
+  <mat-tab label="Заметки">
+    <ng-template matTabContent class="mat-tab-label">
+      <ng-template mat-tab-label>Заметки</ng-template>
+      <!-- Вкладка с заметками -->
+      <div *ngIf="!adding && !editing">
+        <div class="notes-block">
+          <h1>Все заметки</h1>
+
+          <button mat-raised-button color="primary" (click)="adding = !adding">
+            <mat-icon>add</mat-icon>
+            новая заметка
+          </button>
+        </div>
+        <!-- КНОПКА ВЫЗОВА ДИАЛОГОВОГО ОКНА ТЕСТ
+        <button mat-raised-button (click)="openDialog('0ms', '0ms')">
+          Open dialog without animation
+        </button> -->
+
+        <!-- ТЕЛО ЗАМЕТКИ -->
+        <div *ngFor="let habit of habits; let i = index">
+          <mat-card class="note">
+            <mat-card-header>
+              <!-- ЗАГОЛОВОК ЗАМЕТКИ -->
+              <!-- ПОДЗАГОЛОВОК ЗАМЕТКИ -->
+              <mat-card-subtitle> 06/04/2023 </mat-card-subtitle>
+              <mat-card-title>
+                <mat-icon class="habit-icon" color="accent">bookmark</mat-icon>
+                {{ habit.name }}
+              </mat-card-title>
+            </mat-card-header>
+            <div class="detail-options">
+              <!-- КНОПКИ РЕДАКТИРОВАНИЕ\УДАЛЕНИЕ ЗАМЕТКИ -->
+              <div class="example-button-row">
+                <div class="example-flex-container">
+                  <button
+                    mat-icon-button
+                    color="primary"
+                    aria-label="Example icon button with a vertical three dot icon"
+                    (click)="setEditForm(habit, i)"
+                  >
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button
+                    mat-icon-button
+                    color="warn"
+                    aria-label="Example icon button with a home icon"
+                    (click)="onDelete(i)"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- КОНТЕНТ ЗАМЕТКИ -->
+            <mat-card-content>
+              <p>{{ habit.description }}</p>
+              <mat-divider></mat-divider>
+              <p>
+                <!-- ТЕГИ ЗАМЕТКИ -->
+              </p>
+
+              <p>
+                <span>Тег:</span>
+                <span>{{ habit.frequency }}</span>
+              </p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <!-- ТЕЛО ЗАМЕТКИ КОНЕЦ -->
+      </div>
+    </ng-template>
+  </mat-tab>
+  <!-- ТАБ НАПОМИНАНИЯ -->
+  <mat-tab label="Напоминания">
+    <ng-template matTabContent class="mat-tab-label">
+      <ng-template mat-tab-label>Напоминания</ng-template>
+      <!-- Вкладка с заметками -->
+      <div *ngIf="!adding && !editing">
+        <div class="notes-block">
+          <h1>Все напоминания</h1>
+
+          <button mat-raised-button color="primary" (click)="adding = !adding">
+            <mat-icon>add</mat-icon>
+            новое напоминание
+          </button>
+        </div>
+        <!-- КНОПКА ВЫЗОВА ДИАЛОГОВОГО ОКНА ТЕСТ
+        <button mat-raised-button (click)="openDialog('0ms', '0ms')">
+          Open dialog without animation
+        </button> -->
+
+        <!-- ТЕЛО ЗАМЕТКИ -->
+        <div *ngFor="let habit of habits; let i = index">
+          <mat-card class="note">
+            <!-- ЗАГОЛОВОК ЗАМЕТКИ -->
+            <!-- ПОДЗАГОЛОВОК ЗАМЕТКИ -->
+            <mat-card-subtitle> 06/04/2023 - 13/04/2023</mat-card-subtitle>
+            <mat-card-title>
+              <mat-icon class="habit-icon">notifications</mat-icon>
+              {{ habit.name }}
+            </mat-card-title>
+
+            <div class="detail-options">
+              <!-- КНОПКИ РЕДАКТИРОВАНИЕ\УДАЛЕНИЕ ЗАМЕТКИ -->
+              <!--<div class="example-button-row">
+                <div class="example-flex-container">
+                  <button
+                    mat-icon-button
+                    color="primary"
+                    aria-label="Example icon button with a vertical three dot icon"
+                    (click)="setEditForm(habit, i)"
+                  >
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button
+                    mat-icon-button
+                    color="warn"
+                    aria-label="Example icon button with a home icon"
+                    (click)="onDelete(i)"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>-->
+            </div>
+            <!-- КОНТЕНТ ЗАМЕТКИ -->
+            <mat-card-content>
+              <p></p>
+              <p>
+                <!-- ТЕГИ ЗАМЕТКИ -->
+                <span class="detail-label">Тег:</span>
+                <span class="tag-name">{{ habit.frequency }}</span>
+              </p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <!-- ТЕЛО ЗАМЕТКИ КОНЕЦ -->
+      </div>
+    </ng-template>
+  </mat-tab>
+  <!-- ТАБ ТЕГИ -->
+  <mat-tab label="Теги">
+    <ng-template mat-tab-label> Теги </ng-template>
+    <div class="notes-block">
+      <h1>Теги</h1>
+    </div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Favorite Fruits</mat-label>
+      <mat-chip-grid #chipGrid aria-label="Enter fruits">
+        <mat-chip-row
+          *ngFor="let keyword of keywords"
+          (removed)="remove(keyword)"
+          [aria-description]="'press enter to edit ' + keyword"
+        >
+          {{ keyword }}
+          <button matChipRemove [attr.aria-label]="'remove ' + keyword">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+        <input
+          placeholder="New fruit..."
+          [matChipInputFor]="chipGrid"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="add($event)"
+        />
+      </mat-chip-grid>
+    </mat-form-field>
+  </mat-tab>
+</mat-tab-group>
+<!-- ФОРМА ДБАВЛЕНИЯ ЗАМЕТКИ -->
+<div class="add-form-container" *ngIf="adding || editing">
+  <mat-card>
+    <mat-card-title>
+      {{ adding ? 'Добавить' : 'Редактировать' }} заметку
+    </mat-card-title>
+    <form [formGroup]="habitForm" (ngSubmit)="onSubmit()">
+      <mat-card-content>
+        <mat-form-field appearance="fill">
+          <mat-label>Заголовок</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="fill">
+          <mat-label>Описание</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Выберите дату</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate placeholder="Start date" />
+            <input matEndDate placeholder="End date" />
+          </mat-date-range-input>
+          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+
+        <mat-chip-listbox aria-label="Fish selection">
+          <mat-chip-option>тег 1</mat-chip-option>
+          <mat-chip-option>тег 2</mat-chip-option>
+          <mat-chip-option>тег 3</mat-chip-option>
+        </mat-chip-listbox>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit">
+          Сохранить
+        </button>
+        <button mat-raised-button (click)="exitForm()">Закрыть</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>
